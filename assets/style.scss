@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('./transparent.jpg');
+    background-repeat: repeat;
+    background-size: contain contain;
+    font-family: monospace;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#controls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.25rem 1rem;
+    color: #fff;
+
+    transform: translateY(90%);
+    transition: all ease-in-out 0.5s;
+
+    &:hover {
+        transform: translateY(0%);
+    }
+
+    label {
+        display: table-cell;
+    }
+    input {
+        width: 100%;
+    }
+}
