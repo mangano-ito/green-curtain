@@ -11,6 +11,18 @@ body {
     align-items: center;
 }
 
+#notice {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    line-height: 2;
+
+    transition: opacity ease-in-out 0.5s;
+}
+
 #controls {
     position: absolute;
     right: 0;
