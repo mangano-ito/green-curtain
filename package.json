@@ -1,0 +1,27 @@
+{
+  "name": "green-curtain",
+  "version": "1.0.0",
+  "description": "An Online Virtual-screen Tool",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "npm run build && webpack-dev-server",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mangano-ito",
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "@types/three": "^0.103.2",
+    "@types/webpack": "^4.41.11",
+    "@types/webpack-dev-server": "^3.10.1",
+    "html-webpack-plugin": "^4.2.0",
+    "raw-loader": "^4.0.1",
+    "three": "^0.115.0",
+    "ts-loader": "^7.0.0",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
