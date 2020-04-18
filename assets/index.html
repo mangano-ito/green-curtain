@@ -14,27 +14,23 @@
         <canvas id="the_canvas"></canvas>
         <aside id="controls">
             <h2>Options</h2>
-            <p>
-                <label for="background_image">Background Image URL:</label>
-                <input id="background_image" name="background_image" type="text" placeholder="https://" />
-            </p>
-            <p>
-                <label for="mask_color">Mask Color:</label>
-                <input id="mask_color" name="mask_color" type="color" value="#00FFCC" />
-                <input id="mask_color_text" name="mask_color_text" type="text" value="#00FFCC" />
-            </p>
-            <p>
-                <label for="intensity_h">Intensity (Hue):</label>
-                <input id="intensity_h" type="range" value="20" min="0" max="100" />
-            </p>
-            <p>
-                <label for="intensity_s">Intensity (Saturation):</label>
-                <input id="intensity_s" type="range" value="80" min="0" max="100" />
-            </p>
-            <p>
-                <label for="intensity_v">Intensity (Value):</label>
-                <input id="intensity_v" type="range" value="70" min="0" max="100" />
-            </p>
+            <form>
+                <dl>
+                    <dt><label for="background_image">Background Image URL:</label></dt>
+                    <dd><input id="background_image" name="background_image" type="text" placeholder="https://" /><dd>
+                    <dt><label for="mask_color">Mask Color:</label></dt>
+                    <dd>
+                        <input id="mask_color" name="mask_color" type="color" value="#ffffff" />
+                        <input id="mask_color_text" name="mask_color_text" type="text" value="#ffffff" placeholder="#ffffff" />
+                    </dd>
+                    <dt><label for="intensity_h">Intensity (Hue):</label></dt>
+                    <dd><input id="intensity_h" type="range" value="20" min="0" max="100" /></dd>
+                    <dt><label for="intensity_s">Intensity (Saturation):</label></dt>
+                    <dd><input id="intensity_s" type="range" value="80" min="0" max="100" /></dd>
+                    <dt><label for="intensity_v">Intensity (Value):</label></dt>
+                    <dd><input id="intensity_v" type="range" value="70" min="0" max="100" /></dd>
+                </dl>
+            </form>
         </aside>
     </body>
 </html>
