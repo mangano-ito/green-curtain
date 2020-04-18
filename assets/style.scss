@@ -27,14 +27,19 @@ body {
     position: absolute;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0.25rem 1rem;
-    color: #fff;
 
-    transform: translateY(90%);
-    transition: all ease-in-out 0.5s;
+    border-top-left-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.1rem 1rem;
+    color: #fff;
+    line-height: 2;
+    opacity: 0.5;
+
+    transform: translateY(85%);
+    transition: opacity ease-in-out 0.5s, transform ease-in-out 0.5s;
 
     &:hover {
+        opacity: 1.0;
         transform: translateY(0%);
     }
 
