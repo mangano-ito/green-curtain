@@ -1,50 +1,59 @@
-body {
+* {
     margin: 0;
     padding: 0;
+}
+
+body {
+    display: flex;
     background: url('./transparent.jpg');
     background-repeat: repeat;
     background-size: contain contain;
     font-family: monospace;
     overflow: hidden;
-    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.ui {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 1rem 2rem;
+    line-height: 2;
+    border-radius: 0.5rem;
+    z-index: 20;
+    transition: opacity ease-in-out 0.5s, transform ease-in-out 0.5s;
+
+    &:not(:hover) {
+        opacity: 0.5;
+    }
+
+    h2 {
+        margin-bottom: 0.5rem;
+    }
+    dd {
+        margin-left: 2rem;
+    }
+}
+
+#the_canvas {
+    z-index: 10;
+    pointer-events: none;
 }
 
 #notice {
     position: absolute;
     top: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
     padding: 1rem;
-    border-radius: 0.5rem;
-    line-height: 2;
-
-    transition: opacity ease-in-out 0.5s;
+    opacity: 1;
 }
 
 #controls {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: -0.5rem;
+    bottom: -0.5rem;
 
-    border-top-left-radius: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0.1rem 1rem;
-    color: #fff;
-    line-height: 2;
-    opacity: 0.5;
-
-    transform: translateY(85%);
-    transition: opacity ease-in-out 0.5s, transform ease-in-out 0.5s;
-
-    &:hover {
-        opacity: 1.0;
-        transform: translateY(0%);
-    }
-
-    label {
-        display: table-cell;
+    &:not(:hover) {
+        transform: translateX(45%) translateY(85%);
     }
     input {
         width: 100%;
