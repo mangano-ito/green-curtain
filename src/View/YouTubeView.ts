@@ -19,6 +19,7 @@ export default class YouTubeView {
     }
 
     hide() {
+        this.iframeElement.src = '';
         this.iframeElement.style.display = 'none';
     }
 }
