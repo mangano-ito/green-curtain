@@ -9,6 +9,11 @@ export default class IntensityControl {
     private intensitySaturationSliderElement: HTMLInputElement;
     private intensityValueSliderElement: HTMLInputElement;
 
+    private defaultIntensityHue: number = 20;
+    private defaultIntensitySaturation: number = 70;
+    private defaultIntensityValue: number = 80;
+    private maxValue = 100;
+
     private onIntensityUpdatedListener: OnIntensityUpdatedListener = () => {};
 
     constructor(
@@ -25,7 +30,17 @@ export default class IntensityControl {
         this.intensityHueSliderElement = intensityElementH;
         this.intensitySaturationSliderElement = intensityElementS;
         this.intensityValueSliderElement = intensityElementV;
+        this.reset();
         this.attach();
+    }
+
+    reset() {
+        this.intensityHueSliderElement.value = this.defaultIntensityHue + '';
+        this.intensitySaturationSliderElement.value = this.defaultIntensityHue + '';
+        this.intensityValueSliderElement.value = this.defaultIntensityHue + '';
+        this.intensityHueSliderElement.max = this.maxValue + '';
+        this.intensitySaturationSliderElement.max = this.maxValue + '';
+        this.intensityValueSliderElement.max = this.maxValue + '';
     }
 
     setOnIntensityUpdatedListener(listener: OnIntensityUpdatedListener) {
@@ -34,9 +49,9 @@ export default class IntensityControl {
 
     private onIntensityUpdated() {
         this.onIntensityUpdatedListener(
-            parseInt(this.intensityHueSliderElement.value || '20') / 100,
-            parseInt(this.intensitySaturationSliderElement.value || '70') / 100,
-            parseInt(this.intensityValueSliderElement.value || '80') / 100,
+            (parseInt(this.intensityHueSliderElement.value) || this.defaultIntensityHue) / this.maxValue,
+            (parseInt(this.intensitySaturationSliderElement.value) || this.defaultIntensitySaturation) / this.maxValue,
+            (parseInt(this.intensityValueSliderElement.value) || this.defaultIntensityValue) / this.maxValue,
         );
     }
 
