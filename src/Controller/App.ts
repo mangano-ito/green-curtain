@@ -1,5 +1,6 @@
 import Renderer from '#/Delegates/Renderer';
 import UserVideoStream from '#/Delegates/UserVideoStream';
+import BackgroundYouTubeUpdate from '#/UseCase/BackgroundYouTubeUpdate';
 import BackgroundImageUpdate from '#/UseCase/BackgroundImageUpdate';
 
 /**
@@ -11,6 +12,7 @@ export default class App {
     private canvasElement: HTMLCanvasElement;
 
     private backgroundImageUpdate: BackgroundImageUpdate;
+    private backgroundYouTubeUpdate: BackgroundYouTubeUpdate;
 
     /**
      * @param canvasQuery query for canvas element
@@ -22,6 +24,11 @@ export default class App {
         }
         this.canvasElement = canvasElement;
 
+        const externalVideoElement = document.querySelector<HTMLElement>('#external_video');
+        if (!externalVideoElement) {
+            throw new Error('#external_video is required.');
+        }
+        this.backgroundYouTubeUpdate = new BackgroundYouTubeUpdate(externalVideoElement);
         this.backgroundImageUpdate = new BackgroundImageUpdate();
 
         this.attachListeners();
@@ -83,5 +90,11 @@ export default class App {
         backgroundImageElement?.addEventListener('change', () => this.backgroundImageUpdate.invoke(backgroundImageElement.value));
 
         window.addEventListener('resize', () => this.renderer?.updateDimension());
+
+        const backgroundYouTubeElement = document.querySelector<HTMLInputElement>('#background_youtube');
+        backgroundYouTubeElement?.addEventListener('change', () => {
+            const id = backgroundYouTubeElement.value;
+            this.backgroundYouTubeUpdate.invoke(id);
+        });
     }
 }
