@@ -1,23 +1,22 @@
+import YouTubeView from "#/View/YoutubeView";
+
 /**
  * update background YouTube video
  */
 export default class BackgroundYouTubeUpdate {
     /**
-     * @param container video container element
+     * @param container YouTube view
      */
-    constructor(private container: HTMLElement) {}
+    constructor(private view: YouTubeView) {}
 
     /**
      * @param id ID of YouTube Video
      */
     invoke(id: string) {
-        this.container.innerHTML = '';
         if (id === '') {
+            this.view.hide();
             return;
         }
-
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${id}`;
-        this.container.appendChild(iframe);
+        this.view.show(id);
     }
 }

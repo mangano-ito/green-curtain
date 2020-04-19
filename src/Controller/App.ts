@@ -6,6 +6,7 @@ import MaskColorControl from '#/View/MaskColorControl';
 import IntensityControl from '#/View/IntensityControl';
 import BackgroundImageControl from '#/View/BackgroundImageControl';
 import BackgroundYouTubeControl from '#/View/BackgroundYouTubeControl';
+import YouTubeView from '#/View/YoutubeView';
 
 /**
  * green-curtain application controller
@@ -19,6 +20,7 @@ export default class App {
     private intensityControl: IntensityControl;
     private backgroundImageControl: BackgroundImageControl;
     private backgroundYouTubeControl: BackgroundYouTubeControl;
+    private youTubeView: YouTubeView;
 
     private backgroundImageUpdate: BackgroundImageUpdate;
     private backgroundYouTubeUpdate: BackgroundYouTubeUpdate;
@@ -45,14 +47,13 @@ export default class App {
         this.backgroundYouTubeControl = new BackgroundYouTubeControl();
         this.backgroundYouTubeControl.setOnBackgroundYouTubeUpdatedListener((id: string) => this.backgroundYouTubeUpdate.invoke(id));
 
-        const externalVideoElement = document.querySelector<HTMLElement>('#external_video');
-        if (!externalVideoElement) {
-            throw new Error('#external_video is required.');
-        }
-        this.backgroundYouTubeUpdate = new BackgroundYouTubeUpdate(externalVideoElement);
+        this.youTubeView = new YouTubeView();
+
+        this.backgroundYouTubeUpdate = new BackgroundYouTubeUpdate(this.youTubeView);
         this.backgroundImageUpdate = new BackgroundImageUpdate();
 
-        this.attachListeners();
+        document.querySelector<HTMLFormElement>('form')?.reset();
+        window.addEventListener('resize', () => this.renderer?.updateDimension());
     }
 
     /**
@@ -66,13 +67,5 @@ export default class App {
         }
         this.renderer = new Renderer(this.canvasElement, videoElement);
         this.renderer.startRendering();
-    }
-
-    /**
-     * attach user control listeners
-     */
-    private attachListeners() {
-        document.querySelector<HTMLFormElement>('form')?.reset();
-        window.addEventListener('resize', () => this.renderer?.updateDimension());
     }
 }
