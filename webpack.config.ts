@@ -5,7 +5,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const config: webpack.Configuration = {
     mode: process.env.NODE_ENV == 'production' ? 'production' : 'development',
     entry: {
-        '__wds': 'webpack-dev-server/client?http://localhost:8080',
         'main': path.join(__dirname, '/src/main.ts'),
     },
     output: {
