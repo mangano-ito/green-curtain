@@ -4,7 +4,7 @@ An experimental online color-masked video cropping tool.
 
 ## Try It Out
 
-(link)
+https://mangano-ito.github.io/green-curtain/
 
 ## Run Locally
 
