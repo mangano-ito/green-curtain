@@ -14,7 +14,7 @@ import YouTubeView from '#/View/YouTubeView';
  */
 export default class App {
     private video = new UserVideoStream();
-    private renderer: Renderer | undefined;
+    private renderer: Renderer;
     private canvasElement: HTMLCanvasElement;
 
     private maskColorControl: MaskColorControl = new MaskColorControl();
@@ -36,6 +36,7 @@ export default class App {
             throw new Error('The Canvas is required.');
         }
         this.canvasElement = canvasElement;
+        this.renderer = new Renderer(this.canvasElement);
 
         this.maskColorControl.setOnMaskColorUpdateListener((color: string) => this.renderer?.updateMaskColor(color));
         this.intensityControl.setOnIntensityUpdatedListener((intensityH: number, intensityS: number, intensityV) => this.renderer?.updateIntensity(intensityH, intensityS, intensityV));
@@ -52,7 +53,7 @@ export default class App {
     async run() {
         const videoElement = await this.video.waitForVideoStreamElement();
         this.noticeView.hide();
-        this.renderer = new Renderer(this.canvasElement, videoElement);
+        this.renderer.updateVideo(videoElement);
         this.renderer.startRendering();
     }
 }
