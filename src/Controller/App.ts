@@ -10,6 +10,7 @@ import NoticeView from '#/View/NoticeView';
 import YouTubeView from '#/View/YouTubeView';
 import TakeAPhotoButton from '#/View/TakeAPhotoButton';
 import PhotoTake from '#/UseCase/PhotoTake';
+import PhotoTakeDialog from '#/View/PhotoTakeDialog';
 
 /**
  * green-curtain application controller
@@ -26,10 +27,11 @@ export default class App {
     private takeAPhotoButton: TakeAPhotoButton = new TakeAPhotoButton();
     private youTubeView: YouTubeView = new YouTubeView();
     private noticeView: NoticeView = new NoticeView();
+    private photoTakeDialog: PhotoTakeDialog = new PhotoTakeDialog();
 
     private backgroundImageUpdate: BackgroundImageUpdate = new BackgroundImageUpdate();
     private backgroundYouTubeUpdate: BackgroundYouTubeUpdate = new BackgroundYouTubeUpdate(this.youTubeView);
-    private photoTake: PhotoTake = new PhotoTake();
+    private photoTake: PhotoTake = new PhotoTake(this.photoTakeDialog);
 
     /**
      * @param canvasQuery query for canvas element
