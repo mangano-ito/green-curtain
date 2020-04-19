@@ -7,6 +7,7 @@ import IntensityControl from '#/View/IntensityControl';
 import BackgroundImageControl from '#/View/BackgroundImageControl';
 import BackgroundYouTubeControl from '#/View/BackgroundYouTubeControl';
 import YouTubeView from '#/View/YoutubeView';
+import NoticeView from '#/View/NoticeView';
 
 /**
  * green-curtain application controller
@@ -21,6 +22,7 @@ export default class App {
     private backgroundImageControl: BackgroundImageControl;
     private backgroundYouTubeControl: BackgroundYouTubeControl;
     private youTubeView: YouTubeView;
+    private noticeView: NoticeView;
 
     private backgroundImageUpdate: BackgroundImageUpdate;
     private backgroundYouTubeUpdate: BackgroundYouTubeUpdate;
@@ -48,6 +50,7 @@ export default class App {
         this.backgroundYouTubeControl.setOnBackgroundYouTubeUpdatedListener((id: string) => this.backgroundYouTubeUpdate.invoke(id));
 
         this.youTubeView = new YouTubeView();
+        this.noticeView = new NoticeView();
 
         this.backgroundYouTubeUpdate = new BackgroundYouTubeUpdate(this.youTubeView);
         this.backgroundImageUpdate = new BackgroundImageUpdate();
@@ -61,10 +64,7 @@ export default class App {
      */
     async run() {
         const videoElement = await this.video.waitForVideoStreamElement();
-        const noticeElement = document.querySelector<HTMLElement>('#notice');
-        if (noticeElement) {
-            noticeElement.style.opacity = '0';
-        }
+        this.noticeView.hide();
         this.renderer = new Renderer(this.canvasElement, videoElement);
         this.renderer.startRendering();
     }
