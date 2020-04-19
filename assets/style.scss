@@ -90,6 +90,29 @@ body {
     top: 50%;
     padding: 1rem;
     opacity: 1;
+    z-index: 100;
+    pointer-events: none;
+}
+
+#taken_photo_dialog {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+    bottom: 25%;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    &.hidden {
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    img {
+        width: 50%;
+    }
 }
 
 #shares {
