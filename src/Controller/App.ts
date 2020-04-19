@@ -1,5 +1,6 @@
 import Renderer from '#/Delegates/Renderer';
 import UserVideoStream from '#/Delegates/UserVideoStream';
+import BackgroundImageUpdate from '#/UseCase/BackgroundImageUpdate';
 
 /**
  * green-curtain application controller
@@ -8,6 +9,8 @@ export default class App {
     private video = new UserVideoStream();
     private renderer: Renderer | undefined;
     private canvasElement: HTMLCanvasElement;
+
+    private backgroundImageUpdate: BackgroundImageUpdate;
 
     /**
      * @param canvasQuery query for canvas element
@@ -18,6 +21,9 @@ export default class App {
             throw new Error('The Canvas is required.');
         }
         this.canvasElement = canvasElement;
+
+        this.backgroundImageUpdate = new BackgroundImageUpdate();
+
         this.attachListeners();
     }
 
@@ -40,16 +46,6 @@ export default class App {
 
     updateIntensity(intensityH: number, intensityS: number, intensityV: number) {
         this.renderer?.updateIntensity(intensityH, intensityS, intensityV);
-    }
-
-    updateBackground(url: string) {
-        if (url == '') {
-            document.body.style.cssText = '';
-        } else {
-            document.body.style.background = `url("${url}")`;
-            document.body.style.backgroundSize = 'contain';
-            document.body.style.backgroundPosition = 'center';
-        }
     }
 
     /**
@@ -84,9 +80,7 @@ export default class App {
         intensityElementV?.addEventListener('change', updateIntensity);
 
         const backgroundImageElement = document.querySelector<HTMLInputElement>('#background_image');
-        backgroundImageElement?.addEventListener('change', () => {
-            this.updateBackground(backgroundImageElement.value);
-        });
+        backgroundImageElement?.addEventListener('change', () => this.backgroundImageUpdate.invoke(backgroundImageElement.value));
 
         window.addEventListener('resize', () => this.renderer?.updateDimension());
     }
