@@ -1,4 +1,4 @@
-import YouTubeView from "#/View/YoutubeView";
+import YouTubeView from "#/View/YouTubeView";
 
 /**
  * update background YouTube video

@@ -6,8 +6,8 @@ import MaskColorControl from '#/View/MaskColorControl';
 import IntensityControl from '#/View/IntensityControl';
 import BackgroundImageControl from '#/View/BackgroundImageControl';
 import BackgroundYouTubeControl from '#/View/BackgroundYouTubeControl';
-import YouTubeView from '#/View/YoutubeView';
 import NoticeView from '#/View/NoticeView';
+import YouTubeView from '#/View/YouTubeView';
 
 /**
  * green-curtain application controller
