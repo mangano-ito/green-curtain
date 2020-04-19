@@ -5,19 +5,19 @@
         <title>Green Curtain</title>
     </head>
     <body>
-        <aside id="notice">
+        <aside id="notice" class="ui">
             <p>
                 To use this tool, allow using your camera.<br />
                 (You may have got a popup asking. If you denied, reload the page.)
             </p>
         </aside>
         <canvas id="the_canvas"></canvas>
-        <aside id="controls">
+        <aside id="controls" class="ui">
             <h2>Options</h2>
             <form>
                 <dl>
                     <dt><label for="background_image">Background Image URL:</label></dt>
-                    <dd><input id="background_image" name="background_image" type="text" placeholder="https://" /><dd>
+                    <dd><input id="background_image" name="background_image" type="text" placeholder="https://" /></dd>
                     <dt><label for="mask_color">Mask Color:</label></dt>
                     <dd>
                         <input id="mask_color" name="mask_color" type="color" value="#ffffff" />
@@ -26,9 +26,9 @@
                     <dt><label for="intensity_h">Intensity (Hue):</label></dt>
                     <dd><input id="intensity_h" type="range" value="20" min="0" max="100" /></dd>
                     <dt><label for="intensity_s">Intensity (Saturation):</label></dt>
-                    <dd><input id="intensity_s" type="range" value="80" min="0" max="100" /></dd>
+                    <dd><input id="intensity_s" type="range" value="70" min="0" max="100" /></dd>
                     <dt><label for="intensity_v">Intensity (Value):</label></dt>
-                    <dd><input id="intensity_v" type="range" value="70" min="0" max="100" /></dd>
+                    <dd><input id="intensity_v" type="range" value="80" min="0" max="100" /></dd>
                 </dl>
             </form>
         </aside>
