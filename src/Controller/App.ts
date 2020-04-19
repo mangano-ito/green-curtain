@@ -2,6 +2,7 @@ import Renderer from '#/Delegates/Renderer';
 import UserVideoStream from '#/Delegates/UserVideoStream';
 import BackgroundYouTubeUpdate from '#/UseCase/BackgroundYouTubeUpdate';
 import BackgroundImageUpdate from '#/UseCase/BackgroundImageUpdate';
+import MaskColorControl from '#/View/MaskColorControl';
 
 /**
  * green-curtain application controller
@@ -10,6 +11,8 @@ export default class App {
     private video = new UserVideoStream();
     private renderer: Renderer | undefined;
     private canvasElement: HTMLCanvasElement;
+
+    private maskColorControl: MaskColorControl;
 
     private backgroundImageUpdate: BackgroundImageUpdate;
     private backgroundYouTubeUpdate: BackgroundYouTubeUpdate;
@@ -23,6 +26,9 @@ export default class App {
             throw new Error('The Canvas is required.');
         }
         this.canvasElement = canvasElement;
+
+        this.maskColorControl = new MaskColorControl();
+        this.maskColorControl.setOnMaskColorUpdateListener((color: string) => this.renderer?.updateMaskColor(color));
 
         const externalVideoElement = document.querySelector<HTMLElement>('#external_video');
         if (!externalVideoElement) {
@@ -47,10 +53,6 @@ export default class App {
         this.renderer.startRendering();
     }
 
-    updateMaskColor(colorString: string) {
-        this.renderer?.updateMaskColor(colorString);
-    }
-
     updateIntensity(intensityH: number, intensityS: number, intensityV: number) {
         this.renderer?.updateIntensity(intensityH, intensityS, intensityV);
     }
@@ -60,17 +62,6 @@ export default class App {
      */
     private attachListeners() {
         document.querySelector<HTMLFormElement>('form')?.reset();
-        const maskColorElement = document.querySelector<HTMLInputElement>('#mask_color');
-        const maskColorTextElement = document.querySelector<HTMLInputElement>('#mask_color_text');
-        maskColorElement?.addEventListener('change', () => {
-            this.updateMaskColor(maskColorElement?.value || '#ffffff');
-            maskColorTextElement!.value = maskColorElement.value;
-
-        });
-        maskColorTextElement?.addEventListener('change', () => {
-            this.updateMaskColor(maskColorTextElement?.value || '#ffffff');
-            maskColorElement!.value = maskColorTextElement.value;
-        });
 
         const intensityElementH = document.querySelector<HTMLInputElement>('#intensity_h');
         const intensityElementS = document.querySelector<HTMLInputElement>('#intensity_s');
