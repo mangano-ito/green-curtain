@@ -17,15 +17,15 @@ export default class App {
     private renderer: Renderer | undefined;
     private canvasElement: HTMLCanvasElement;
 
-    private maskColorControl: MaskColorControl;
-    private intensityControl: IntensityControl;
-    private backgroundImageControl: BackgroundImageControl;
-    private backgroundYouTubeControl: BackgroundYouTubeControl;
-    private youTubeView: YouTubeView;
-    private noticeView: NoticeView;
+    private maskColorControl: MaskColorControl = new MaskColorControl();
+    private intensityControl: IntensityControl = new IntensityControl();
+    private backgroundImageControl: BackgroundImageControl = new BackgroundImageControl();
+    private backgroundYouTubeControl: BackgroundYouTubeControl = new BackgroundYouTubeControl();
+    private youTubeView: YouTubeView = new YouTubeView();
+    private noticeView: NoticeView = new NoticeView();
 
-    private backgroundImageUpdate: BackgroundImageUpdate;
-    private backgroundYouTubeUpdate: BackgroundYouTubeUpdate;
+    private backgroundImageUpdate: BackgroundImageUpdate = new BackgroundImageUpdate();
+    private backgroundYouTubeUpdate: BackgroundYouTubeUpdate = new BackgroundYouTubeUpdate(this.youTubeView);
 
     /**
      * @param canvasQuery query for canvas element
@@ -37,23 +37,10 @@ export default class App {
         }
         this.canvasElement = canvasElement;
 
-        this.maskColorControl = new MaskColorControl();
         this.maskColorControl.setOnMaskColorUpdateListener((color: string) => this.renderer?.updateMaskColor(color));
-
-        this.intensityControl = new IntensityControl();
         this.intensityControl.setOnIntensityUpdatedListener((intensityH: number, intensityS: number, intensityV) => this.renderer?.updateIntensity(intensityH, intensityS, intensityV));
-
-        this.backgroundImageControl = new BackgroundImageControl();
         this.backgroundImageControl.setOnBackgroundImageUpdatedListener((url: string) => this.backgroundImageUpdate.invoke(url));
-
-        this.backgroundYouTubeControl = new BackgroundYouTubeControl();
         this.backgroundYouTubeControl.setOnBackgroundYouTubeUpdatedListener((id: string) => this.backgroundYouTubeUpdate.invoke(id));
-
-        this.youTubeView = new YouTubeView();
-        this.noticeView = new NoticeView();
-
-        this.backgroundYouTubeUpdate = new BackgroundYouTubeUpdate(this.youTubeView);
-        this.backgroundImageUpdate = new BackgroundImageUpdate();
 
         document.querySelector<HTMLFormElement>('form')?.reset();
         window.addEventListener('resize', () => this.renderer?.updateDimension());
