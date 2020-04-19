@@ -11,10 +11,12 @@
   "author": "mangano-ito",
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
+    "@types/dom-to-image": "^2.6.0",
     "@types/three": "^0.103.2",
     "@types/webpack": "^4.41.11",
     "@types/webpack-dev-server": "^3.10.1",
     "css-loader": "^3.5.2",
+    "dom-to-image": "^2.6.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
     "node-sass": "^4.13.1",
