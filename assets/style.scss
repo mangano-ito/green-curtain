@@ -41,6 +41,16 @@ body {
     label {
         margin-right: 0.5rem;
     }
+    button {
+        border: thin solid #fff;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 0.3rem 0.5rem;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 1.0);
+        }
+    }
     input[type="text"] {
         border: thin solid #fff;
         background-color: rgba(255, 255, 255, 0.8);
@@ -95,9 +105,6 @@ body {
     p {
         margin-bottom: 1rem;
     }
-    button {
-        padding: 0.25rem;
-    }
     ul {
         display: flex;
         flex-direction: row;
@@ -105,6 +112,9 @@ body {
     }
     li {
         display: inline-block;
+        * {
+            vertical-align: top;
+        }
     }
 }
 
