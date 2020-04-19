@@ -51,7 +51,7 @@ export default class Renderer {
         this.camera.lookAt(0, 0, 0);
         this.scene.add(this.camera);
 
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, });
+        const renderer = new THREE.WebGLRenderer({ canvas, preserveDrawingBuffer: true, alpha: true, });
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setClearColor(0x000000, 0);
         this.renderer = renderer;
