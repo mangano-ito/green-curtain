@@ -44,6 +44,11 @@ const config: webpack.Configuration = {
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: 'assets/index.html',
+            filename: 'index.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: 'assets/index.en.html',
+            filename: 'index.en.html',
         }),
     ],
     devServer: {
