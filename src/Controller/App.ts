@@ -4,6 +4,7 @@ import BackgroundYouTubeUpdate from '#/UseCase/BackgroundYouTubeUpdate';
 import BackgroundImageUpdate from '#/UseCase/BackgroundImageUpdate';
 import MaskColorControl from '#/View/MaskColorControl';
 import IntensityControl from '#/View/IntensityControl';
+import BackgroundImageControl from '#/View/BackgroundImageControl';
 
 /**
  * green-curtain application controller
@@ -15,6 +16,7 @@ export default class App {
 
     private maskColorControl: MaskColorControl;
     private intensityControl: IntensityControl;
+    private backgroundImageControl: BackgroundImageControl;
 
     private backgroundImageUpdate: BackgroundImageUpdate;
     private backgroundYouTubeUpdate: BackgroundYouTubeUpdate;
@@ -34,6 +36,9 @@ export default class App {
 
         this.intensityControl = new IntensityControl();
         this.intensityControl.setOnIntensityUpdatedListener((intensityH: number, intensityS: number, intensityV) => this.renderer?.updateIntensity(intensityH, intensityS, intensityV));
+
+        this.backgroundImageControl = new BackgroundImageControl();
+        this.backgroundImageControl.setOnBackgroundImageUpdatedListener((url: string) => this.backgroundImageUpdate.invoke(url));
 
         const externalVideoElement = document.querySelector<HTMLElement>('#external_video');
         if (!externalVideoElement) {
@@ -63,10 +68,6 @@ export default class App {
      */
     private attachListeners() {
         document.querySelector<HTMLFormElement>('form')?.reset();
-
-        const backgroundImageElement = document.querySelector<HTMLInputElement>('#background_image');
-        backgroundImageElement?.addEventListener('change', () => this.backgroundImageUpdate.invoke(backgroundImageElement.value));
-
         window.addEventListener('resize', () => this.renderer?.updateDimension());
 
         const backgroundYouTubeElement = document.querySelector<HTMLInputElement>('#background_youtube');
