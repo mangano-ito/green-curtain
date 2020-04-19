@@ -3,6 +3,7 @@ import UserVideoStream from '#/Delegates/UserVideoStream';
 import BackgroundYouTubeUpdate from '#/UseCase/BackgroundYouTubeUpdate';
 import BackgroundImageUpdate from '#/UseCase/BackgroundImageUpdate';
 import MaskColorControl from '#/View/MaskColorControl';
+import IntensityControl from '#/View/IntensityControl';
 
 /**
  * green-curtain application controller
@@ -13,6 +14,7 @@ export default class App {
     private canvasElement: HTMLCanvasElement;
 
     private maskColorControl: MaskColorControl;
+    private intensityControl: IntensityControl;
 
     private backgroundImageUpdate: BackgroundImageUpdate;
     private backgroundYouTubeUpdate: BackgroundYouTubeUpdate;
@@ -29,6 +31,9 @@ export default class App {
 
         this.maskColorControl = new MaskColorControl();
         this.maskColorControl.setOnMaskColorUpdateListener((color: string) => this.renderer?.updateMaskColor(color));
+
+        this.intensityControl = new IntensityControl();
+        this.intensityControl.setOnIntensityUpdatedListener((intensityH: number, intensityS: number, intensityV) => this.renderer?.updateIntensity(intensityH, intensityS, intensityV));
 
         const externalVideoElement = document.querySelector<HTMLElement>('#external_video');
         if (!externalVideoElement) {
@@ -53,29 +58,11 @@ export default class App {
         this.renderer.startRendering();
     }
 
-    updateIntensity(intensityH: number, intensityS: number, intensityV: number) {
-        this.renderer?.updateIntensity(intensityH, intensityS, intensityV);
-    }
-
     /**
      * attach user control listeners
      */
     private attachListeners() {
         document.querySelector<HTMLFormElement>('form')?.reset();
-
-        const intensityElementH = document.querySelector<HTMLInputElement>('#intensity_h');
-        const intensityElementS = document.querySelector<HTMLInputElement>('#intensity_s');
-        const intensityElementV = document.querySelector<HTMLInputElement>('#intensity_v');
-        const updateIntensity = () => {
-            this.updateIntensity(
-                parseInt(intensityElementH?.value || '20') / 100,
-                parseInt(intensityElementS?.value || '70') / 100,
-                parseInt(intensityElementV?.value || '80') / 100,
-            );
-        };
-        intensityElementH?.addEventListener('change', updateIntensity);
-        intensityElementS?.addEventListener('change', updateIntensity);
-        intensityElementV?.addEventListener('change', updateIntensity);
 
         const backgroundImageElement = document.querySelector<HTMLInputElement>('#background_image');
         backgroundImageElement?.addEventListener('change', () => this.backgroundImageUpdate.invoke(backgroundImageElement.value));
