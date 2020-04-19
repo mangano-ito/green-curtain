@@ -10,7 +10,7 @@ const config: webpack.Configuration = {
     },
     output: {
         path: path.join(__dirname, '/dist'),
-        publicPath: path.join(__dirname, '/dist'),
+        publicPath: process.env.PUBLIC_PATH ? process.env.PUBLIC_PATH : path.join(__dirname, '/dist'),
         filename: '[name].js',
     },
     module: {
