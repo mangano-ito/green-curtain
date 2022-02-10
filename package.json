@@ -21,7 +21,7 @@
     "dom-to-image": "^2.6.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "raw-loader": "^4.0.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.4",
